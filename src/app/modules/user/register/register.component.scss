@@ -1,0 +1,29 @@
+form {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+form:first-child {
+    margin-top: 100px;
+}
+
+mat-form-field {
+    width: 300px;
+}
+
+mat-icon {
+    width: fit-content;
+}
+
+.custom-link {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.custom-link:hover {
+    color: #0056b3;
+}

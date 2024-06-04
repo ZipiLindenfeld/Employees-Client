@@ -1,0 +1,24 @@
+<header id="header">
+    <nav id="links">
+        <button mat-button *ngIf="!connected()" (click)="login()">
+            <mat-icon>login</mat-icon>
+            Log in
+        </button>
+        <button mat-button routerLink="/employee/allEmployees">
+            <mat-icon>library_books</mat-icon>
+            All Employees
+        </button>
+        <button mat-button (click)="addEmployee()">
+            <mat-icon>add_circle</mat-icon>
+            Add Employee
+        </button>
+        <button mat-icon-button (click)="register()">
+            <mat-icon>person_add</mat-icon>
+            Add User
+        </button>
+        <button mat-button *ngIf="connected()" (click)="logout()">
+            <mat-icon>exit_to_app</mat-icon>
+            Log out
+        </button>
+    </nav>
+</header>

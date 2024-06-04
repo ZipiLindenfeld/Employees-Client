@@ -1,0 +1,41 @@
+<div class="table-options">
+    <div class="search-field">
+        <mat-form-field appearance="fill">
+            <mat-label>Search</mat-label>
+            <input matInput type="text" [(ngModel)]="pattern" (input)="change()" placeholder="enter string">
+            <button mat-button matSuffix><mat-icon>search</mat-icon></button>
+        </mat-form-field>
+    </div>
+    <div class="buttons">
+        <button mat-button (click)="openAddEmployeeDialog(null)"><mat-icon>add_circle</mat-icon>Add Employee</button>
+        <button mat-button (click)="exportToExcel()"><mat-icon>cloud_download</mat-icon>Export to Excel</button>
+        <button mat-button (click)="addRole()"><mat-icon>work</mat-icon> Add Role</button>
+    </div>
+</div>
+<div class="tableDiv">
+    <table class="table tableTable">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Employee Identification</th>
+                <th>Start Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let employee of employees">
+                <td>{{ employee.lastName }} {{ employee.firstName }}</td>
+                <td>{{ employee.employeeIdentification }}</td>
+                <td>{{ employee.startDate |date }}</td>
+                <td>
+                    <mat-icon>arrow_forward</mat-icon>
+                    <button mat-button (click)="openShowDetailsEmployeeDialog(employee)">More Details</button>
+                    <mat-icon>edit</mat-icon>
+                    <button mat-button (click)="openAddEmployeeDialog(employee)">Edit</button>
+                    <mat-icon>delete</mat-icon>
+                    <button mat-button (click)="deleteEmployee(employee.id)">Delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

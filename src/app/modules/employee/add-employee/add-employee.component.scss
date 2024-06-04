@@ -1,0 +1,87 @@
+.dialog-content {
+    max-height: 900px;
+    justify-content: center;
+}
+
+#addDiv {
+    padding-top: 50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    height: 600px;
+    overflow: auto;
+}
+
+.roleDiv {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+
+.example-container {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    align-items: flex-start;
+}
+
+.userRoles,
+.availableRoles {
+    width: 250px;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    padding: 20px;
+    ;
+}
+
+.userRolesDiv,
+.availableRolesDiv {
+    width: 100px;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: row;
+    //background-color: red;
+}
+
+#rolesDiv {
+    display: flex;
+    flex-direction: row;
+}
+
+
+.mat-card-content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    /* Optional: Adjust as needed */
+    justify-content: space-around;
+    /* Optional: Adjust as needed */
+}
+
+p {
+    width: 30px;
+}
+
+.wide-input {
+    width: 150px;
+    display: flex;
+    align-self: center;
+}
+
+.wide {
+    width: 80px;
+    display: flex;
+    align-self: center;
+}
+
+.rolerole {
+    display: flex;
+    justify-content: center;
+}
+
+#saveOrCancel {
+    display: flex;
+    justify-content: center;
+}

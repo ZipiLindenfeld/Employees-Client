@@ -1,0 +1,35 @@
+<div *ngIf="employee" class="employee-details mat-elevation-z2">
+  <button mat-icon-button (click)="return()">
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+  <div class="detail title">
+    <mat-label class="highlight"><strong>{{ employee.firstName }} {{ employee.lastName }}</strong></mat-label>
+  </div>
+  <div class="detail" id="big">
+    <mat-label><strong>Identification: </strong></mat-label>
+    <span>{{ employee.employeeIdentification }}</span>
+  </div>
+  <div class="detail" id="big">
+    <mat-label><strong>Start Date: </strong></mat-label>
+    <span>{{ employee.startDate | date }}</span>
+  </div>
+  <div class="detail" id="big">
+    <mat-label><strong>Birth Date: </strong></mat-label>
+    <span>{{ employee.birthDate | date }}</span>
+  </div>
+  <div class="detail" id="big">
+    <mat-label><strong>Gender: </strong></mat-label>
+    <span class="value" id="big">
+      <mat-icon>{{ employee.gender === 'Male' ? 'man' : 'woman' }}</mat-icon>
+    </span>
+  </div>
+  <div id="big">
+    <mat-label><strong>Roles: </strong></mat-label>
+    <ul>
+      <li *ngFor="let role of employee.roles">
+        <p class="role-name" id="big"><strong>{{ role.role.name }}</strong></p>
+        <p class="role-start-date" id="big">{{ role.startDate | date }}</p>
+      </li>
+    </ul>
+  </div>
+</div>

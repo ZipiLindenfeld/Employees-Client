@@ -1,0 +1,126 @@
+<div id="addDiv">
+    <form class="dialog-content" *ngIf="employeeForm" [formGroup]="employeeForm" id="addForm">
+        <div class="example-container">
+            <div>
+                <mat-form-field>
+                    <mat-label>First Name</mat-label>
+                    <input matInput type="text" placeholder="First Name" formControlName="firstName" />
+                </mat-form-field>
+                <div *ngIf="employeeForm.get('firstName').invalid && employeeForm.get('firstName').touched"
+                    style="color: red;">This field is required</div>
+                <br />
+                <mat-form-field>
+                    <mat-label>Last Name</mat-label>
+                    <input matInput type="text" placeholder="Last Name" formControlName="lastName" />
+                </mat-form-field>
+                <div *ngIf="employeeForm.get('lastName').invalid && employeeForm.get('lastName').touched"
+                    style="color: red;">This field is required</div>
+                <br />
+                <mat-form-field>
+                    <mat-label>Identification</mat-label>
+                    <input matInput type="text" placeholder="Employee Identification"
+                        formControlName="employeeIdentification" />
+                </mat-form-field>
+                <div *ngIf="employeeForm.get('employeeIdentification').invalid && employeeForm.get('employeeIdentification').touched"
+                    style="color: red;">
+                    <div
+                        *ngIf="employeeForm.get('employeeIdentification').hasError('required')&&!employeeForm.get('employeeIdentification').hasError('inValidId')&&!employeeForm.get('employeeIdentification').hasError('minlength')">
+                        This field is required
+                    </div>
+                    <div
+                        *ngIf="!employeeForm.get('employeeIdentification').hasError('required')&&employeeForm.get('employeeIdentification').hasError('minlength') || employeeForm.get('employeeIdentification').hasError('maxlength')">
+                        You must fill 9 letters
+                    </div>
+                    <div *ngIf="employeeForm.get('employeeIdentification').hasError('inValidId')&&!employeeForm.get('employeeIdentification').hasError('required')&&!employeeForm.get('employeeIdentification').hasError('minlength')&&!employeeForm.get('employeeIdentification').hasError('mשסlength')"
+                        style="color: red;">
+                        the Identification is invalid!
+                    </div>
+                </div>
+                <br />
+                <mat-form-field style="width: 200px;">
+                    <mat-label>Gender</mat-label>
+                    <select matNativeControl formControlName="gender">
+                        <option [value]="0">{{gender.Male}}</option>
+                        <option [value]="1">{{gender.Female}}</option>
+                    </select>
+                </mat-form-field>
+                <br />
+                <mat-form-field>
+                    <mat-label>Birth Date</mat-label>
+                    <input matInput type="date" placeholder="Birth Date" formControlName="birthDate" />
+                </mat-form-field>
+                <div *ngIf="employeeForm.get('birthDate').invalid && employeeForm.get('birthDate').touched"
+                    style="color: red;">This field is required</div>
+                <br />
+                <br />
+                <mat-form-field>
+                    <mat-label>Start Date</mat-label>
+                    <input matInput type="date" placeholder="Start Date" formControlName="startDate" />
+                </mat-form-field>
+                <ng-container *ngIf="employeeForm.get('startDate').invalid && employeeForm.get('startDate').touched">
+                    <div *ngIf="employeeForm.get('startDate').hasError('required')" style="color: red;">
+                        This field is required
+                    </div>
+                    <div *ngIf="employeeForm.get('startDate').hasError('inValidStartDate')" style="color: red;">
+                        Start date must be after birthDate
+                    </div>
+                </ng-container>
+            </div>
+            <div id="rolesDiv">
+                <div class="userRoles">
+                    <h2>Roles</h2>
+                    <mat-card>
+                        <mat-card-content>
+                            <div *ngFor="let r of  employeeForm.get('roles').value; let i = index" class="userRolesDiv">
+                                <div class="rolerole">
+                                    <button mat-icon-button color="warn" (click)="removeRole(r,i)">
+                                        <mat-icon>remove</mat-icon>
+                                    </button>
+                                    <p class="wide">{{ r.name }}</p>
+                                    <p class="wide-input">{{ r.startDate|date }}</p>
+                                </div>
+                            </div>
+                        </mat-card-content>
+                    </mat-card>
+                </div>
+            </div>
+        </div>
+        <div id="saveOrCancel">
+            <div>
+                <button mat-fab extended type="submit" [disabled]="!employeeForm.valid" (click)="saveNewEmployee()">
+                    <mat-icon>save</mat-icon>
+                    Save
+                </button>
+                <button mat-fab extended type="button" (click)="cancel()">
+                    <mat-icon>undo</mat-icon>
+                    Cancel
+                </button>
+            </div>
+        </div>
+    </form>
+    <div class="availableRoles">
+        <h2>Available Roles:</h2>
+        <mat-card>
+            <mat-card-content>
+                <div *ngFor="let r of AvailableRoles; let i = index" class="availableRolesDiv">
+                    <button mat-icon-button *ngIf="!showDate[i]" (click)="showDateInput(i)">
+                        <mat-icon>add</mat-icon>
+                    </button>
+                    <p class="wide">{{ r.role.name }}</p>
+                    <div>
+                        <br *ngIf="showDate[i]" />
+                        <label *ngIf="showDate[i]">Enter Start Date:</label>
+                        <input *ngIf="showDate[i]" type="date" class="wide-input" [(ngModel)]="r.startDate">
+                        <div *ngIf="!isValidRoleDate(r.startDate)&&showDate[i]" style="color: red;">
+                            role's startDate must be after startDate of the job
+                        </div>
+                        <button mat-raised-button color="primary" *ngIf="showDate[i]" (click)="addRole(r, i)"
+                            [disabled]="!isValidRoleDate(r.startDate)">Add</button>
+                        <button mat-raised-button color="warn" *ngIf="showDate[i]"
+                            (click)="showDateInput(i)">Cancel</button>
+                    </div>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>
